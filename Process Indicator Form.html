@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Process Indicator Technical Specification Form</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #ffffff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        form {
+            width: 100%;
+            max-width: 700px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #36e4ef;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 22px;
+            border-bottom: 2px solid #bbdefb;
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #cfd8dc;
+            border-radius: 6px;
+            margin-bottom: 22px;
+            font-size: 14px;
+            background-color: #f9fcff;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            transform: scale(1.02);
+            border-color: #29b6f6; 
+            box-shadow: 0 4px 8px rgba(41, 182, 246, 0.3); 
+            outline: none;
+            background-color: #e1f5fe; 
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background: linear-gradient(to right, #43a047, #388e3c);
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0 12px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(67, 160, 71, 0.3);
+
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        button.clear-btn {
+            background: white;
+            color: #444;
+            border: 1.5px solid #cfd8dc;
+        }
+
+        button.clear-btn:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+
+	<form id="SpecForm">
+	<h2>Process Indicator Technical Specification Form</h2>
+
+	<label for="Type">Type:</label>
+	<select id="Type" name="Type">
+            <option value="Indicator">Indicator</option>
+	    <option value="Controller">Controller</option>
+	    <option value="PID">PID</option>
+	    <option value="Scanner">Scanner</option>
+	    <option value="Datalogger">Datalogger</option>
+	    <option value="Jumbo Display Indicator">Jumbo Display Indicator</option>
+	    <option value="Loop Power Indicator">Loop Power Indicator</option>
+	</select>
+
+	<label for="Dimension">Dimension:</label>
+	<select id="Dimension" name="Dimension">
+	     <option value="96&#215;96">96×96</option>
+	     <option value="72&#215;72">72×72</option>
+	     <option value="48&#215;48">48×48</option>
+	     <option value="48&#215;96">48×96</option>
+	     <option value="96&#215;48">96×48</option>
+	     <option value="96&#215;192">96×192</option>
+	</select>
+
+	<label for="NoofChannel">No of Channel:</label>
+	<select id="No of Channel" name="No of Channel">
+	      <option value="1">1</option>
+	      <option value="2">2</option>
+	      <option value="4">4</option>
+	      <option value="8">8</option>
+	      <option value="16">16</option>
+	</select>
+
+	<label for="Display">Display:</label>
+	<select id="Display" name="Display">
+	      <option value="Single">Single</option>
+	      <option value="Double">Double</option>
+	</select>
+
+	<label for="Protection">Protection:</label>
+	<select id="Protection" name="Protection">
+	      <option value="Weatherproof">Weatherproof</option>
+	      <option value="Flameproof">Flameproof</option>
+	</select>
+
+	<label for="SupplyVoltage">Supply Voltage:</label>
+	<select id="Supply Voltage" name="Supply Voltage">
+	       <option value="230V AC / 50 Hz">230 V / 50 Hz</option>
+	       <option value="24V DC">24V DC</option>
+	       <option value="Battery Operated">Battery Operated</option>
+	</select>
+
+	<label for="Input">Input:</label>
+	<select id="Input" name="Input">
+	       <option value="J">J</option>
+	       <option value="K">K</option>
+	       <option value="N">N</option>
+	       <option value="R">R</option>
+	       <option value="S">S</option>
+	       <option value="B">B</option>
+	       <option value="Universal">Universal</option>
+	       <option value="RTD">RTD</option>
+	       <option value="RTD.1">RTD.1</option>
+	       <option value="4-20 mA">4-20 mA</option>
+	       <option value="0-20 mA">0-20 mA</option>
+	       <option value="0-5V DC">0-5V DC</option>
+	</select>
+
+	<label for="Water/Dust Proof">Water/Dust Proof:</label>
+	<select id="Water/Dust Proof" name="Water/Dust Proof">
+	       <option value="IP-54">IP-54</option>
+	       <option value="IP-65">IP-65</option>
+	       <option value="IP-67">IP-67</option>
+	</select>
+	
+	<label for="Output 1">Output 1:</label>
+	<select id="Output 1" name="Output 1">
+	        <option value="Alarm">Alarm</option>
+	        <option value="Relay">Relay</option>
+	        <option value="SSR">SSR</option>
+	        <option value="4-20 mA Control Output">4-20 mA Control Output</option>
+	        <option value="0-10V DC">0-10V DC</option>
+	        <option value="4-20 mA Retransmission">4-20 mA Retransmission</option>
+	        <option value="24V DC Transmitter Supply">24V DC Transmitter Supply</option>
+	        <option value="RS 232">RS 232</option>
+	        <option value="RS 486">RS 386</option>
+	</select>
+
+	<label for="Output 2">Output 2:</label>
+	<select id="Output 2" name="Output 2">
+	        <option value="Alarm">Alarm</option>
+	        <option value="Relay">Relay</option>
+	        <option value="SSR">SSR</option>
+	        <option value="4-20 mA Control Output">4-20 mA Control Output</option>
+	        <option value="0-10V DC">0-10V DC</option>
+	        <option value="4-20 mA Retransmission">4-20 mA Retransmission</option>
+	        <option value="24V DC Transmitter Supply">24V DC Transmitter Supply</option>
+	        <option value="RS 232">RS 232</option>
+	        <option value="RS 486">RS 386</option>
+	</select>
+
+<label for="Remarks">Additional Remarks:</label>
+        <input type="text" id="Remarks" name="Remarks" placeholder="Type additional remarks here" />
+
+        <div class="button-container">
+            <button type="button" onclick="generatePDF()">Generate PDF File</button>
+            <button type="button" class="clear-btn" onclick="clearForm()">Clear Form</button>
+        </div>
+    </form>
+
+    <script>
+        window.onload = function () {
+            const { jsPDF } = window.jspdf;
+
+            window.generatePDF = function () {
+                const form = document.getElementById('SpecForm');
+                const formData = new FormData(form);
+                const tableData = [];
+                const logoURL = 'https://yt3.googleusercontent.com/YPiSQabXEH_feXdd1xtE3ArOYuZvLU09Ny4Bs9EDMrfobt3Z1v7Lj-uCt8pCzfgvPLpoNZVVCg=s160-c-k-c0x00ffffff-no-rj';
+
+                for (let [key, value] of formData.entries()) {
+                    tableData.push([
+                        key,
+                        value
+                    ]);
+                }
+
+                const doc = new jsPDF();
+
+                
+                const pageWidth = doc.internal.pageSize.width;
+                const logoWidth = 30;  
+                const logoHeight = 30; 
+                const logoX = pageWidth - logoWidth - 8; 
+                const logoY = 2; 
+
+                doc.addImage(logoURL, 'JPEG', logoX, logoY, logoWidth, logoHeight);
+
+                doc.autoTable({
+                    head: [['Technical Specification', 'Drop-Down Selection']],
+                    body: tableData,
+                    startY: logoY + logoHeight , 
+                    margin: { horizontal: 15 },
+                    headStyles: {
+                        fillColor: [54, 164, 235],
+                        textColor: [255, 255, 255],
+                        fontStyle: 'bold',
+                        fontSize: 14
+                    },
+                    columnStyles: {
+                        0: { fontStyle: 'bold', textColor: [54, 164, 235] },
+                        1: { textColor: [0, 0, 0] }
+                    },
+                    bodyStyles: {
+                        fontSize: 12,
+                        textColor: [0, 0, 0]
+                    },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(22);
+                        doc.setTextColor(54, 164, 235);
+                        doc.text('Technical Specifications', data.settings.margin.left, 18);
+                        doc.setDrawColor(54, 164, 235);
+                        doc.setLineWidth(0.5);
+                        doc.line(data.settings.margin.left, 22, data.settings.margin.left + 60, 22);
+                    }
+                });
+
+                doc.save("TechnicalSpecifications.pdf");
+            };
+
+            window.clearForm = function () {
+                document.getElementById('SpecForm').reset();
+            };
+        };
+    </script>
+</body>
+
+</html>
